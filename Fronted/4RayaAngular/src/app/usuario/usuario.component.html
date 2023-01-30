@@ -1,0 +1,25 @@
+<h1>Usuario</h1>
+<div id="formulario">
+    <form  class="custom-form" #usuarioForm="ngForm" (ngSubmit)="onSubmit(usuarioForm.value)">
+        
+        <div  >
+            <div 
+            id="userOne" class="row">
+                <div  >
+                    <label>Usuario </label>
+                    <input type="text" name="userName" placeholder="usuario"  ngModel>
+                </div>
+              
+                    <div >
+                        <label>Contraseña:</label>
+                        <input type="password" name="password"  placeholder="password" ngModel>
+                    </div>
+                
+                <div *ngIf="show" class="col-12">
+                    <a class="alerta">Contraseña incorrecta</a>
+                </div>
+            </div>
+        </div>
+        <button type="submit" >Añadir</button>
+    </form>
+</div>

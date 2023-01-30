@@ -1,0 +1,12 @@
+div{
+    margin: auto ;
+    text-align: center;
+}
+button {
+    display: block;
+    margin: auto;
+}
+app-columna {
+    display: inline-block;
+    
+}

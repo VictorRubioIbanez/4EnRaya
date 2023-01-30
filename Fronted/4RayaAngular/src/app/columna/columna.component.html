@@ -1,0 +1,11 @@
+<button style="margin-bottom: 20px;"  (click)="addToken()">Insert <br> token <br> here</button>
+<table>
+    <td>
+        <tr *ngFor= " let celda of celdas">
+            <div id=" {{celda.id}}" *ngIf="celda.bg==='white'" style="background-color: white;"></div>
+            <div id=" {{celda.id}}" *ngIf="celda.bg==='red'" style="background-color: red;"></div>
+            <div id=" {{celda.id}}" *ngIf="celda.bg==='black'" style="background-color: black;"></div>
+        </tr>
+        
+    </td>
+</table>
