@@ -29,5 +29,11 @@ public class GameController {
     public Mono<Void> deleteUser(@PathVariable String id){
         return gameService.deleteGame(id);
     }
+
+    @PostMapping("/playerTwo")
+    public Mono<Game> setPlayerTwo(@RequestParam String idGame,
+                                   @RequestParam String playerTwo){
+        return gameService.addPlayerTwo(idGame,playerTwo);
+    }
 }
 

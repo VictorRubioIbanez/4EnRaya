@@ -1,39 +1,36 @@
 <div class="card text-bg-white mb-3" >
-    <h2>Bienvenido {{userName}}</h2>
-    <div class="card-header">Partida</div>
+    <h2>Bienvenido {{playerOne}}</h2>
+    <div class="card-header"></div>
     <div class="card-body">
-    <div class="my-2 text-left" >
-    <button class="btn btn-rounded btn-primary" type ="button" (click)="create()" [routerLink]="['/tablero']"> Crear Partida</button>
+        <div class="my-2 text-left" >
+            <button class="btn btn-rounded btn-primary" type ="button" (click)="create()" [routerLink]="['/tablero']"> Crear Partida</button>
+        </div>
+        <h5 class="card-title">Listado de Partidas</h5>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th> id </th>
+                    <th>Jugador 1</th>
+                    <th>Jugador 2</th>
+                    <th> Fecha </th>
+                    <th>Jugar</th>
+                    <th>Eliminar</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor=" let Game of partidas">
+                    <td class="text-lowercase">{{  Game.id }}</td>
+                    <td class="text-uppercase">{{  Game.playerOne }}</td>
+                    <td class="text-uppercase">{{  Game.playerTwo }}</td>
+                    <td class="date-format dd-mm-yyyy ">{{  Game.createAt }}</td>
+                    <td>
+                        <button type="button" [routerLink]="['/tablero']" class="btn btn-primary btn-sm">Jugar</button>
+                    </td>
+                    <td>
+                        <button type="button" name="eliminar"  (click)="delete(Game)"class="btn btn-danger btn-sm">Eliminar</button>
+                    </td>  
+                </tr>
+            </tbody>
+        </table>
     </div>
-    <h5 class="card-title">Listado de Partidas</h5>
-    <table class="table table-bordered">
-
-    <thead>
-        <tr>
-            <th> id </th>
-            <th> nombre </th>
-            <th> Fecha </th>
-            <th>Jugar</th>
-            <th>Eliminar</th>
-        </tr>
-    </thead>
-    <tbody>
-
-        <tr *ngFor=" let Game of partidas">
-            
-                <td class="text-lowercase">{{  Game.id }}</td>
-                <td class="text-uppercase">{{  Game.userName }}</td>
-                <td class="date-format dd-mm-yyyy ">{{  Game.createAt }}</td>
-                <td>
-                    <button type="button" [routerLink]="['/tablero']" class="btn btn-primary btn-sm">Jugar</button>
-                </td>
-                <td>
-                    <button type="button" name="eliminar"  (click)="delete(Game)"class="btn btn-danger btn-sm">Eliminar</button>
-                </td>
-            
-        </tr>
-
-    </tbody>
-    </table>
-  </div>
-
+</div>

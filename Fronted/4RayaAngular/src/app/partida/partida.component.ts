@@ -12,7 +12,7 @@ import swal from "sweetalert2";
 })
 export class PartidaComponent implements OnInit{
 
-  userName: string = localStorage.getItem('Usuario')!;
+  playerOne: string = localStorage.getItem('Usuario')!;
 
   public game:Game = new Game();
 
@@ -28,25 +28,26 @@ export class PartidaComponent implements OnInit{
 
   public newGame(){
     alert("Nuevo juego hoho");
-    //this.http.post("http://localhost:8080/player",this.userName);
+    //this.http.post("http://localhost:8080/player",this.playerOne);
   }
 
   cargarPartidas():void{
 
-    this.PartidaService.getPartidas().subscribe(partidas => {this.partidas=partidas
-
+    this.PartidaService.getPartidas().subscribe(partidas => {
+      this.partidas=partidas
+      console.log(partidas);
     })
 
   }
 
   public create():void{
 
-    this.game.userName=this.userName;
+    this.game.playerOne=this.playerOne;
     this.PartidaService.create(this.game).subscribe(
       game => 
       {
         this.router.navigate(['/tablero'])
-        swal.fire('Nuevo Partida', `Juego ${this.game.userName}  creado con exito`, 'success')
+        swal.fire('Nuevo Partida', `Juego ${this.game.playerOne}  creado con exito`, 'success')
     }
     )
   }
@@ -55,7 +56,7 @@ export class PartidaComponent implements OnInit{
   delete(game:Game):void{
     swal.fire({
       title: 'Estas seguro de borrar la partida',
-      text: `Seguro que desea eliminar la partida con la id:${game.id} y el nombre de usuario:${game.userName}`,
+      text: `Seguro que desea eliminar la partida con la id:${game.id} y el nombre de usuario:${game.playerOne}`,
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',

@@ -8,5 +8,6 @@ public interface GameService {
     public Game createGame(Game game);
     public Flux<Game> getGames();
     public Mono<Void> deleteGame (String id);
+    public Mono<Game> addPlayerTwo(String idGame, String playerTwo);
 
 }

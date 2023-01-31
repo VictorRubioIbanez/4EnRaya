@@ -1,6 +1,5 @@
 package com.example.rayas.game.model;
 
-import com.example.rayas.player.model.Player;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,9 +14,13 @@ public class Game {
     @Id
     private String id;
 
-    private Player playerOne;
+    private String playerOne;
 
-    private Player playerTwo;
+    private String playerTwo;
 
     private String createAt;
+
+    private boolean status;
+
+    private String[][] gameBoard = new String[6][7];
 }

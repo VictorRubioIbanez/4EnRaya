@@ -1,6 +1,7 @@
 export class Game {
     id!: number;
-    userName!: string;
+    playerOne!: string;
+    playerTwo!: string;
     createAt!: string;
     partida!:Array<number>[][];
 
