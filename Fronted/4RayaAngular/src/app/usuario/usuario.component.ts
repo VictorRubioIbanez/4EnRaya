@@ -10,8 +10,6 @@ import { Usuario } from './models/usuario';
 })
 
 export class UsuarioComponent {
-
-
   show = false;
 
   constructor(private http: HttpClient,
