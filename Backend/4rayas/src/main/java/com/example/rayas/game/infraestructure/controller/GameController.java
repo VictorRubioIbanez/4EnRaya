@@ -11,7 +11,8 @@ import reactor.core.publisher.Mono;
 
 @RestController
 @RequestMapping("/game")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin
+//@CrossOrigin(origins = "http://localhost:4200")
 public class GameController {
 
     @Autowired

@@ -4,9 +4,10 @@ import com.example.rayas.game.model.Game;
 import com.example.rayas.player.model.Player;
 import lombok.Data;
 
-//intento clase singleton
+//Clase singleton
+//se puede cambiar de tabla usando el SET del GameUtils de Game
 @Data
-public class GameUtils extends Game {
+public class GameUtils {
 
     static final String WINNERPHRASE = "WINNER || Player: ";
 
@@ -33,6 +34,7 @@ public class GameUtils extends Game {
             System.out.println("There is no space in this column");
         } else {
             board[coordinates[0]][coordinates[1]] = player.getUserName();
+            checkBoard(player.getUserName());
         }
     }
 
@@ -75,7 +77,7 @@ public class GameUtils extends Game {
     public static boolean checkBoard(String playerName) {
         boolean checkBoolean = true;
 
-        if (!checkHorizontal(playerName) || !checkVertical(playerName)) {
+        if (!checkHorizontal(playerName) || !checkVertical(playerName) || !checkDiagonal(playerName)) {
             checkBoolean = false;
         }
 
@@ -83,7 +85,7 @@ public class GameUtils extends Game {
     }
 
     //Checking vertical tokens
-    public static boolean checkHorizontal(String playerName) {
+    private static boolean checkHorizontal(String playerName) {
         int horizontalCounter = 0;
 
         for (int i = 0; i < board.length; i++) {
@@ -107,7 +109,7 @@ public class GameUtils extends Game {
     }
 
     //Checking vertical tokens
-    public static boolean checkVertical(String playerName) {
+    private static boolean checkVertical(String playerName) {
         int verticalCounter = 0;
 
         for (int i = 0; i < board[0].length; i++) {
@@ -132,8 +134,8 @@ public class GameUtils extends Game {
         return true;
     }
 
-    //Fixed Jose Del Rio
-    public static boolean checkDiagonal(String playerName) {
+    //Fixed by Jose Del Rio
+    private static boolean checkDiagonal(String playerName) {
 
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 4; j++) {

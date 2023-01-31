@@ -11,7 +11,8 @@ import java.nio.file.Path;
 
 @RestController
 @RequestMapping("/player")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin
+//@CrossOrigin(origins = {"http://localhost:4200", "http://localhost:62013"})
 public class PlayerController {
 
     @Autowired
