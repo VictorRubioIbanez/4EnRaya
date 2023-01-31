@@ -17,13 +17,17 @@ public class GameController {
     @Autowired
     GameServiceImpl gameService;
 
-
     @PostMapping
     public Game createGame(@RequestBody Game game){
         return gameService.createGame(game);
     }
 
-    @GetMapping("/all")
+    @GetMapping("/{idGame}")
+    public Mono<Game> getGameById(@PathVariable("idGame") String idGame){
+        return gameService.getGameById(idGame);
+    }
+
+    @GetMapping
     public Flux<Game> getAllGames(){
         return gameService.getGames();
     }

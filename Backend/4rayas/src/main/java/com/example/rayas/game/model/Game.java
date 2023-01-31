@@ -15,14 +15,9 @@ import java.util.Date;
 @Document("Game")
 public class Game {
 
-
     @Id
-    private String id;
-
+    private String idGame;
     private String userName;
-
     private String createAt;
-
-
 
 }

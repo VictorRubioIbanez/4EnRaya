@@ -19,9 +19,14 @@ public class GameServiceImpl implements GameService{
     public Game createGame(Game game) {
 
         game.setCreateAt(new Date().toString());
-        game.setId(String.valueOf(new Random().nextInt(1,100)));
+        game.setIdGame(String.valueOf(new Random().nextInt(1,100)));
 
         return gameRepository.save(game).block();
+    }
+
+    @Override
+    public Mono<Game> getGameById(String idGame) {
+        return gameRepository.findById(idGame);
     }
 
     @Override
