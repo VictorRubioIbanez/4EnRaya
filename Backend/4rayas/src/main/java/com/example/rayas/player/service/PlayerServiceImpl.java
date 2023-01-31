@@ -16,21 +16,6 @@ public class PlayerServiceImpl implements PlayerService{
     PlayerRepository playerRepository;
 
     @Override
-    public Mono<Player> addPlayer(Player player) {
-        return playerRepository.save(player);
-    }
-
-    @Override
-    public Flux<Player> getAllPlayers() {
-        return playerRepository.findAll();
-    }
-
-    @Override
-    public Mono<Void> deleteUser(String id) {
-        return playerRepository.deleteById(id);
-    }
-
-    @Override
     public boolean checkPlayer(Player player) {
         Mono<Player> checkPlayerMono = playerRepository.findByUserName(player.getUserName());
         Optional<Player> checkPlayerResult = checkPlayerMono.blockOptional();

@@ -17,19 +17,9 @@ public class PlayerController {
     @Autowired
     PlayerServiceImpl playerServiceImpl;
 
-
     @PostMapping
     public boolean checkPlayer(@RequestBody Player player){
         return playerServiceImpl.checkPlayer(player);
     }
 
-    @GetMapping("/all")
-    public Flux<Player> getAllPlayers(){
-        return playerServiceImpl.getAllPlayers();
-    }
-
-    @DeleteMapping("/{id}")
-    public Mono<Void> deleteUser(@PathVariable String id){
-        return playerServiceImpl.deleteUser(id);
-    }
 }

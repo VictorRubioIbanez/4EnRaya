@@ -1,7 +1,6 @@
 package com.example.rayas.game.infraestructure.controller;
 
 import com.example.rayas.game.model.Game;
-import com.example.rayas.game.service.GameService;
 
 import com.example.rayas.game.service.GameServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,10 +12,8 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/game")
 @CrossOrigin(origins = "http://localhost:4200")
 public class GameController {
-
     @Autowired
     GameServiceImpl gameService;
-
 
     @PostMapping
     public Game createGame(@RequestBody Game game){

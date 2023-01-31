@@ -19,7 +19,7 @@ public class GameServiceImpl implements GameService{
     public Game createGame(Game game) {
 
         game.setCreateAt(new Date().toString());
-        game.setId(String.valueOf(new Random().nextInt(1,100)));
+        game.setId(String.valueOf(new Random().nextInt(1,1000)));
 
         return gameRepository.save(game).block();
     }

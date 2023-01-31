@@ -1,4 +1,13 @@
-
+<div id="goBack">
+    <button type="button"  [routerLink]="['/partida']">
+        <img [src]="goBackImage" width="30"/>
+    </button>
+    <button type="button" (click)="fireworks()" style="margin-top: 20px;">FIRE</button>
+</div>
+<div class="pyro" [hidden]="hideFire">
+    <div class="before"></div>
+    <div class="after"></div>
+</div>
 <div>
     
     <app-columna *ngFor="let columna of columnas" id="{{columna}}"></app-columna>
