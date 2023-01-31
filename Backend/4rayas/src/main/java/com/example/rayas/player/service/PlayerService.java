@@ -6,7 +6,8 @@ import reactor.core.publisher.Mono;
 
 public interface PlayerService {
     Mono<Player> addPlayer(Player player);
+    Mono<Player> findPlayerByName(String playerName);
     Flux<Player> getAllPlayers();
-    Mono<Void> deleteUser(String id);
+    Mono<Void> deleteUser(String idPlayer);
     boolean checkPlayer(Player player);
 }

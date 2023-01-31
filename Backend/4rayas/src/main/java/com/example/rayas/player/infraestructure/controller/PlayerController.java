@@ -17,10 +17,14 @@ public class PlayerController {
     @Autowired
     PlayerServiceImpl playerServiceImpl;
 
-
     @PostMapping
     public boolean checkPlayer(@RequestBody Player player){
         return playerServiceImpl.checkPlayer(player);
+    }
+
+    @GetMapping("/{playerName}")
+    public Mono<Player> findPlayerByName(@PathVariable("idPlayer") String idPlayer) {
+        return playerServiceImpl.findPlayerByName(idPlayer);
     }
 
     @GetMapping
