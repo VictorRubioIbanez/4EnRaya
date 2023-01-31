@@ -27,7 +27,7 @@ public class GameController {
         return gameService.getGameById(idGame);
     }
 
-    @GetMapping
+    @GetMapping("/all")
     public Flux<Game> getAllGames(){
         return gameService.getGames();
     }

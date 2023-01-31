@@ -13,7 +13,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Player {
 
     @Id
-    private String idPlayer;
+    private String id;
 
     private String userName;
 

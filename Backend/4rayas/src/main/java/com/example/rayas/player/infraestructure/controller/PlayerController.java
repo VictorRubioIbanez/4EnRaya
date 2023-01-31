@@ -27,7 +27,7 @@ public class PlayerController {
         return playerServiceImpl.findPlayerByName(idPlayer);
     }
 
-    @GetMapping
+    @GetMapping("/all")
     public Flux<Player> getAllPlayers(){
         return playerServiceImpl.getAllPlayers();
     }
