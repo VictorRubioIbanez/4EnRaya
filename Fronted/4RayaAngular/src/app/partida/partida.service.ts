@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Game } from './game';
+import { Game } from './Game';
 import { Observable } from 'rxjs';
 import { of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs';
+
 
 
 @Injectable({
@@ -12,6 +13,7 @@ import { map } from 'rxjs';
 export class PartidaService {
   
 private urlEndPoint:string ='http://localhost:8080/game'
+
 
 private httpHeaders = new HttpHeaders({'Content-Type':'application/json'})
 
@@ -24,6 +26,7 @@ private httpHeaders = new HttpHeaders({'Content-Type':'application/json'})
   create(game: Game):Observable<Game>{
     return this.http.post<Game>(this.urlEndPoint,game)
   }
+
 
   getPartida(id: Number): Observable<Game>{
     return this.http.get<Game>(`${this.urlEndPoint}/${id}`)

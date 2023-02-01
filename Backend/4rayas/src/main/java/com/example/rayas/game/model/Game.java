@@ -6,9 +6,6 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.lang.reflect.Array;
-import java.util.Date;
-
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -18,11 +15,8 @@ public class Game {
 
     @Id
     private String id;
-
     private String userName;
-
     private String createAt;
-
-
+    private String userName2;
 
 }

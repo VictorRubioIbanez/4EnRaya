@@ -2,10 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { PartidaService } from './partida.service';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Game } from './game';
+import { Game } from './Game';
 import swal from "sweetalert2";
 
+
 @Component({
+  
   selector: 'app-partida',
   templateUrl: './partida.component.html',
   styleUrls: ['./partida.component.css']
@@ -15,6 +17,7 @@ export class PartidaComponent implements OnInit{
   userName: string = localStorage.getItem('Usuario')!;
 
   public game:Game = new Game();
+
 
   public partidas:Game[] | undefined;
 
@@ -27,8 +30,10 @@ export class PartidaComponent implements OnInit{
   }
 
   public newGame(){
+
     alert("Nuevo juego hoho");
     //this.http.post("http://localhost:8080/player",this.userName);
+
   }
 
   cargarPartidas():void{
@@ -40,8 +45,9 @@ export class PartidaComponent implements OnInit{
   }
 
   public create():void{
-
+  
     this.game.userName=this.userName;
+    
     this.PartidaService.create(this.game).subscribe(
       game => 
       {
@@ -63,6 +69,7 @@ export class PartidaComponent implements OnInit{
       confirmButtonText: 'Si, Eliminalo!'
     }).then((result) => {
       if (result.value) {
+        
         this.PartidaService.delete(game.id).subscribe(
           response=>{
             this.partidas = this.partidas?.filter(game => game!== game)

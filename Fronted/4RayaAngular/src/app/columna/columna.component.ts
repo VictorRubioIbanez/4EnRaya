@@ -1,15 +1,27 @@
-import { Component } from '@angular/core';
+import { TableroComponent } from './../tablero/tablero.component';
+import { Component, createNgModule } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-columna',
   templateUrl: './columna.component.html',
   styleUrls: ['./columna.component.css']
 })
-export class ColumnaComponent {
-  static turno=0;
 
-  constructor(private http: HttpClient){
+export class ColumnaComponent {
+
+  static turno=0;
+  id:number=0;
+  columnas= [0,1,2,3,4,5,6]
+
+  public numeroFichas :number =0;
+
+  private urlEndPoint:string ='http://localhost:8080/game'
+
+  constructor(private http: HttpClient, private router:Router,private activatedRoute:ActivatedRoute){
+
+
 
   }
    celdas=  [{
@@ -38,10 +50,20 @@ export class ColumnaComponent {
       bg: 'white'
    },
    ]
-   contador=5;
+    public contador=5;
 
    addToken(){
+
+
+      this.numeroFichas++;
+    
+
+      console.log(this.numeroFichas);
+
+      
+      
     var res = ColumnaComponent.turno%2
+
     if(this.contador>=0){
        if(res==0){
         this.celdas[this.contador].bg='red'
@@ -53,9 +75,14 @@ export class ColumnaComponent {
         this.contador=this.contador-1;
        ColumnaComponent.turno=ColumnaComponent.turno+1
        
+       console.log( this.contador);
     }
-    this.http.post("http://localhost:8080/","").
-    subscribe((response)  => {console.log(response);
-    });
+    
+   }
+
+   idChange(){
+     
+     
+
    }
 }

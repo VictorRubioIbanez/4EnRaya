@@ -1,4 +1,5 @@
 export class Usuario {
+    
     private userName: string;
     private password: string;
 
