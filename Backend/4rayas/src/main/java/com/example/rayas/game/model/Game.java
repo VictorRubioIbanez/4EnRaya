@@ -21,6 +21,8 @@ public class Game {
 
     private String userName;
 
+    private String userName2;
+
     private String createAt;
 
 

@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { FichaService } from './../ficha.service';
+import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Usuario } from './models/usuario';
@@ -13,16 +15,22 @@ export class UsuarioComponent {
 
 
   show = false;
+  subscription:Subscription;
 
   constructor(private http: HttpClient,
-              private _router: Router) {
+              private _router: Router,
+              private data:FichaService) {
+  }
+  ngOnInit(): void {
+    this.subscription=this.data.currentUser.subscribe()
+    
   }
 
   onSubmit(usersData: {userName: string, 
                        password: string})
   {
     // Limpia el nombre de usuario almacenado en caché y manda los datos del usuario al controlador del servidor
-    localStorage.clear();
+    
     var usuario = new Usuario(usersData.userName, usersData.password);
     this.http.post("http://localhost:8080/player",usuario)
     .subscribe((response) => {
@@ -33,7 +41,8 @@ export class UsuarioComponent {
       // Si coinciden usuario y contraseña o se registró un nuevo usuario, guarda en caché el nombre y redirige
       // al componente de partida
       else{
-        localStorage.setItem('Usuario',usuario.getUserName());
+        
+        this.data.changeUser(usuario.getUserName())
         this._router.navigate(['/partida'])
       }
       //!response ? this.show = true:  this._router.navigate(['/partida']);

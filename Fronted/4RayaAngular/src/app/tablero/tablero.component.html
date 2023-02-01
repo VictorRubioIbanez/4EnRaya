@@ -1,6 +1,6 @@
 
 <div>
-    
-    <app-columna *ngFor="let columna of columnas" id="{{columna}}"></app-columna>
-    
+    <h1>Id de partida {{idT}}</h1>
+    <app-columna *ngFor="let columna of columnas" id="{{columna}}" [mov]="columna"></app-columna>
+   
 </div>
