@@ -33,7 +33,7 @@ public class GameUtils {
     //Shows how the array is displayed in a visual manner
     public static void showActualBoard(Game game) {
 
-        for (int i = 0; i < game.getBoard().length; i++) {
+        for (int i = game.getBoard().length -1; i >= 0; i--) {
 
             System.out.print("Row " + (i+1) + " || ");
 
@@ -54,7 +54,7 @@ public class GameUtils {
         coordinates[0]=9;
         coordinates[1]=9;
 
-        for (int i = board.length -1; i >= 0; i--){
+        for (int i = 0; i < board.length; i++){
             if ( board[i][column] == null ){
                 coordinates[0]=i;
                 coordinates[1]=column;
