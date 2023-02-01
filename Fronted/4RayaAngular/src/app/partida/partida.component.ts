@@ -17,9 +17,11 @@ import { Subscription } from 'rxjs';
 })
 export class PartidaComponent implements OnInit{
 
+
   userName: string ;
 
   suscription:Subscription;
+
 
   public game:Game = new Game();
 
@@ -42,9 +44,11 @@ export class PartidaComponent implements OnInit{
    
   }
 
+
   abrirPartida(idT:number){
     this.data.changeId(idT)
     this.router.navigate(["/tablero"])
+
 
   }
 
@@ -52,8 +56,9 @@ export class PartidaComponent implements OnInit{
 
   cargarPartidas():void{
 
-    this.PartidaService.getPartidas().subscribe(partidas => {this.partidas=partidas
-
+    this.PartidaService.getPartidas().subscribe(partidas => {
+      this.partidas=partidas
+      console.log(partidas);
     })
 
   }
@@ -64,20 +69,21 @@ export class PartidaComponent implements OnInit{
     
     
 
-    this.game.userName=this.userName;
+    this.game.playerOne=this.userName;
     
     this.PartidaService.create(this.game).subscribe(
       game => 
       {
         
        // window.location.reload();
-       swal.fire('Nuevo Partida', `Juego ${this.game.userName}  creado con exito`, 'success', ).then((result) =>
+       swal.fire('Nuevo Partida', `Juego ${this.game.playerOne}  creado con exito`, 'success', ).then((result) =>
       
       this.cargarPartidas()
         
         );
       
        
+
     }
     )
   }
@@ -86,7 +92,7 @@ export class PartidaComponent implements OnInit{
   delete(game:Game):void{
     swal.fire({
       title: 'Estas seguro de borrar la partida',
-      text: `Seguro que desea eliminar la partida con la id:${game.id} y el nombre de usuario:${game.userName}`,
+      text: `Seguro que desea eliminar la partida con la id:${game.id} y el nombre de usuario:${game.playerOne}`,
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',

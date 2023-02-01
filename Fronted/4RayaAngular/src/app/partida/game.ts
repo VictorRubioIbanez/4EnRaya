@@ -1,8 +1,8 @@
 export class Game {
 
     id!: number;
-    userName!: string;
-    userName2!:string;
+    playerOne!: string;
+    playerTwo!: string;
     createAt!: string;
 
 }

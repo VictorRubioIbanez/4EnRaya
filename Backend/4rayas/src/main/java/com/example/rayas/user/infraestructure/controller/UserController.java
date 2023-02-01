@@ -15,12 +15,12 @@ public class UserController {
     @Autowired
     UserServiceImpl playerServiceImpl;
 
-
     @PostMapping
     public boolean checkPlayer(@RequestBody User user){
         return playerServiceImpl.checkPlayer(user);
     }
 
+<<<<<<< HEAD:Backend/4rayas/src/main/java/com/example/rayas/user/infraestructure/controller/UserController.java
     @GetMapping("/all")
     public Flux<User> getAllPlayers(){
         return playerServiceImpl.getAllPlayers();
@@ -30,4 +30,6 @@ public class UserController {
     public Mono<Void> deleteUser(@PathVariable String id){
         return playerServiceImpl.deleteUser(id);
     }
+=======
+>>>>>>> andres:Backend/4rayas/src/main/java/com/example/rayas/player/infraestructure/controller/PlayerController.java
 }

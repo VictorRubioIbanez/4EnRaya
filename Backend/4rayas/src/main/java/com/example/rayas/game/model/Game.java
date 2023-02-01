@@ -11,15 +11,27 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Data
 @Document("Game")
 public class Game {
-
-
     @Id
     private String id;
+<<<<<<< HEAD
     private String userName;
+=======
+
+    private String playerOne;
+
+    private String playerTwo;
+>>>>>>> andres
 
 
 
     private String createAt;
+<<<<<<< HEAD
     private String userName2;
 
+=======
+
+    private boolean status;
+
+    private String[][] gameBoard = new String[6][7];
+>>>>>>> andres
 }

@@ -1,7 +1,6 @@
 package com.example.rayas.game.infraestructure.controller;
 
 import com.example.rayas.game.model.Game;
-import com.example.rayas.game.service.GameService;
 
 import com.example.rayas.game.service.GameServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,10 +12,10 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/game")
 @CrossOrigin(origins = "http://localhost:4200")
 public class GameController {
-
     @Autowired
     GameServiceImpl gameService;
 
+<<<<<<< HEAD
     @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping("/{mov}/{player}")
     public boolean movimiento(@PathVariable int mov, @PathVariable int player){
@@ -28,6 +27,8 @@ public class GameController {
     @GetMapping("/get/{id}")
     public Mono<Game> getGame(@PathVariable String id){return  gameService.getGame(id);}
 
+=======
+>>>>>>> andres
     @PostMapping
     public Game createGame(@RequestBody Game game){
         return gameService.createGame(game);
@@ -41,6 +42,12 @@ public class GameController {
     @DeleteMapping("/{id}")
     public Mono<Void> deleteUser(@PathVariable String id){
         return gameService.deleteGame(id);
+    }
+
+    @PostMapping("/playerTwo")
+    public Mono<Game> setPlayerTwo(@RequestParam String idGame,
+                                   @RequestParam String playerTwo){
+        return gameService.addPlayerTwo(idGame,playerTwo);
     }
 }
 

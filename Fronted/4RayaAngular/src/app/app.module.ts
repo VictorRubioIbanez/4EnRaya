@@ -1,7 +1,7 @@
 import { PresentacionComponent } from './presentacion/presentacion.component';
 
 import { FooterComponent } from './footer/footer.component';
-import { NgModule } from '@angular/core';
+import {NgModule} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 
@@ -42,7 +42,7 @@ const routes: Routes = [
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-   RouterModule.forRoot(routes)
+   RouterModule.forRoot(routes),
   ],
   providers: [FichaService],
  

@@ -12,8 +12,6 @@ import { Usuario } from './models/usuario';
 })
 
 export class UsuarioComponent {
-
-
   show = false;
   subscription:Subscription;
 

@@ -6,7 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+<<<<<<< HEAD
 import java.util.Date;
+=======
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
+>>>>>>> andres
 import java.util.Random;
 
 @Service
@@ -16,8 +23,9 @@ public class GameServiceImpl implements GameService{
     @Override
     public Game createGame(Game game) {
 
-        game.setCreateAt(new Date().toString());
-        game.setId(String.valueOf(new Random().nextInt(1,100)));
+        LocalDateTime ldt = LocalDateTime.now();
+        game.setCreateAt(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm", Locale.ITALY).format(ldt));
+        game.setId(String.valueOf(new Random().nextInt(1,1000000)));
 
         return gameRepository.save(game).block();
     }
@@ -33,5 +41,12 @@ public class GameServiceImpl implements GameService{
     @Override
     public Mono<Void> deleteGame(String id) {
         return gameRepository.deleteById(id);
+    }
+
+    @Override
+    public Mono<Game> addPlayerTwo(String idGame, String playerTwo) {
+       Game game = gameRepository.findById(idGame).block();
+       game.setPlayerTwo(playerTwo);
+       return gameRepository.save(game);
     }
 }
