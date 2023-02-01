@@ -54,7 +54,7 @@ public class GameUtils {
         coordinates[0]=9;
         coordinates[1]=9;
 
-        for (int i = 0; i < board.length; i++){
+        for (int i = board.length -1; i >= 0; i--){
             if ( board[i][column] == null ){
                 coordinates[0]=i;
                 coordinates[1]=column;
