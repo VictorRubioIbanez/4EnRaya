@@ -6,18 +6,18 @@
     <button class="btn btn-rounded btn-primary" type ="button" (click)="create()" [routerLink]="['/tablero']"> Crear Partida</button>
     </div>
     <h5 class="card-title">Listado de Partidas</h5>
-    <table class="table table-bordered">
+        <table class="table table-bordered">
 
-    <thead>
-        <tr>
-            <th> id </th>
-            <th> nombre </th>
-            <th> Fecha </th>
-            <th>Jugar</th>
-            <th>Eliminar</th>
-        </tr>
-    </thead>
-    <tbody>
+            <thead>
+                <tr>
+                    <th> id </th>
+                    <th> nombre </th>
+                    <th> Fecha </th>
+                    <th>Jugar</th>
+                    <th>Eliminar</th>
+                </tr>
+            </thead>
+        <tbody>
 
         <tr *ngFor=" let Game of partidas">
             
@@ -28,7 +28,7 @@
                     <button type="button" [routerLink]="['/tablero']" class="btn btn-primary btn-sm">Jugar</button>
                 </td>
                 <td>
-                    <button type="button" name="eliminar"  (click)="delete(Game)"class="btn btn-danger btn-sm">Eliminar</button>
+                    <button type="button" name="eliminar"  (click)="delete(Game)" class="btn btn-danger btn-sm">Eliminar</button>
                 </td>
             
         </tr>
@@ -36,4 +36,4 @@
     </tbody>
     </table>
   </div>
-
+</div>
