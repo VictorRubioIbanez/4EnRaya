@@ -20,6 +20,6 @@ public class Game {
     private String playerOne;
     private String playerTwo;
     private boolean status;
-    private String[][] board = new String[6][7];
+    private Integer[][] board = new Integer[6][7];
 
 }
