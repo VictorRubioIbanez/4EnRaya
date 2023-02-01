@@ -13,7 +13,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document("Game")
 public class Game {
 
-
     @Id
     private String id;
     private String userName;

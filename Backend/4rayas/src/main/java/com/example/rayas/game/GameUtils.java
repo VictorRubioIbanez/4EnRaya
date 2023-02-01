@@ -23,12 +23,13 @@ public class GameUtils {
             single_instance = new GameUtils(game);
         return single_instance;
     }
+
     //The player (or just its name) gets passed as a parameter to the
     //function, where the name is used in the array instead of a number
     public static void putToken(Player player, int column) {
         int[] coordinates = new int[2];
 
-        checkColumnSpace(column);
+        coordinates = checkColumnSpace(column);
 
         if (coordinates[0] == 9 && coordinates[1] == 9) {
             System.out.println("There is no space in this column");
