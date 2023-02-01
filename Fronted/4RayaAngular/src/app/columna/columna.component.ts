@@ -37,6 +37,7 @@ export class ColumnaComponent {
      
       var jugador:number=1;
       var res = ColumnaComponent.turno%2
+      this.numeroFichas++;
 
     if(this.contador>=0){
        if(res==0){
