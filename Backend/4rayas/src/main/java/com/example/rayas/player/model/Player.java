@@ -1,4 +1,4 @@
-package com.example.rayas.user.model;
+package com.example.rayas.player.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,7 +10,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @NoArgsConstructor
 @Data
 @Document("Players")
-public class User {
+public class Player {
 
     @Id
     private String id;
@@ -19,7 +19,7 @@ public class User {
 
     private String password;
 
-    public User(String userName, String password) {
+    public Player(String userName, String password) {
         this.userName = userName;
         this.password = password;
     }

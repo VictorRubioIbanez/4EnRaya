@@ -2,18 +2,16 @@ package com.example.rayas.game.service;
 
 import com.example.rayas.game.infraestructure.repository.GameRepository;
 import com.example.rayas.game.model.Game;
+import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-<<<<<<< HEAD
-import java.util.Date;
-=======
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.Locale;
->>>>>>> andres
 import java.util.Random;
 
 @Service
@@ -31,7 +29,9 @@ public class GameServiceImpl implements GameService{
     }
 
     @Override
-    public Mono<Game> getGame(String id){ return gameRepository.findById(id);}
+    public Mono<Game> getGameById(String idGame) {
+        return gameRepository.findById(idGame);
+    }
 
     @Override
     public Flux<Game> getGames() {
@@ -42,11 +42,10 @@ public class GameServiceImpl implements GameService{
     public Mono<Void> deleteGame(String id) {
         return gameRepository.deleteById(id);
     }
-
     @Override
     public Mono<Game> addPlayerTwo(String idGame, String playerTwo) {
-       Game game = gameRepository.findById(idGame).block();
-       game.setPlayerTwo(playerTwo);
-       return gameRepository.save(game);
+        Game game = gameRepository.findById(idGame).block();
+        game.setPlayerTwo(playerTwo);
+        return gameRepository.save(game);
     }
 }
