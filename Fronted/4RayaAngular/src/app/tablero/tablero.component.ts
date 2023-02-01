@@ -1,5 +1,8 @@
-import { Component } from '@angular/core';
-import { ColumnaComponent } from '../columna/columna.component';
+
+import { Subscription } from 'rxjs';
+import { Component, Input } from '@angular/core';
+import {  getNgModuleById } from '@angular/core';
+import { FichaService } from './../ficha.service';
 
 
 @Component({
@@ -11,14 +14,22 @@ export class TableroComponent {
   
     columnas= [0,1,2,3,4,5,6]
 
-      columna!: ColumnaComponent;
 
-    constructor(){}
+    idT:number;
 
-    clickColumn(columna:number){
+    suscription:Subscription;
 
-      console.log(columna);
-      
+    constructor(private data:FichaService){
+
+    }
+
+
+    mov :number;
+
+    ngOnInit(): void {
+      this.suscription=this.data.currentId.subscribe(idT => this.idT=idT)
+     
+
     }
   
 }

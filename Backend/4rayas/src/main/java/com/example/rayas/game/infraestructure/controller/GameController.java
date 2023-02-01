@@ -17,6 +17,16 @@ public class GameController {
     @Autowired
     GameServiceImpl gameService;
 
+    @CrossOrigin(origins = "http://localhost:4200")
+    @PostMapping("/{mov}/{player}")
+    public boolean movimiento(@PathVariable int mov, @PathVariable int player){
+       // board.putCoin(tablero,mov,new Player(),player);
+        return  true;
+
+    }
+
+    @GetMapping("/get/{id}")
+    public Mono<Game> getGame(@PathVariable String id){return  gameService.getGame(id);}
 
     @PostMapping
     public Game createGame(@RequestBody Game game){

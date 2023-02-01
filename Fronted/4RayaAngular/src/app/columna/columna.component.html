@@ -1,4 +1,7 @@
-<button  name=" " style="margin-bottom: 20px;"  (click)="[addToken(), idChange()]" [disabled]="numeroFichas==6">Insert <br> ficha</button>
+
+
+<button style="margin-bottom: 20px;" id="{{mov}}"  (click)="addToken(mov)" [disabled]="numeroFichas==6">Insert <br> token <br> here</button>
+
 <table>
     <td>
         <tr *ngFor= " let celda of celdas">

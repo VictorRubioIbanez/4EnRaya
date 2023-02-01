@@ -5,8 +5,11 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 public interface GameService {
-    public Game createGame(Game game);
-    public Flux<Game> getGames();
-    public Mono<Void> deleteGame (String id);
+     Game createGame(Game game);
+     Flux<Game> getGames();
+     Mono<Void> deleteGame (String id);
+
+     Mono<Game> getGame(String id);
+
 
 }

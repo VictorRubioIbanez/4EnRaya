@@ -23,6 +23,9 @@ public class GameServiceImpl implements GameService{
     }
 
     @Override
+    public Mono<Game> getGame(String id){ return gameRepository.findById(id);}
+
+    @Override
     public Flux<Game> getGames() {
         return gameRepository.findAll();
     }
