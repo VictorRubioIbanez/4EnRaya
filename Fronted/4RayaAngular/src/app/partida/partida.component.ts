@@ -27,7 +27,7 @@ export class PartidaComponent implements OnInit{
   public game:Game = new Game();
 
 
-  public partidas:Game[] | undefined;
+   partidas:Game[];
 
   constructor(private PartidaService:PartidaService, 
     private router:Router,

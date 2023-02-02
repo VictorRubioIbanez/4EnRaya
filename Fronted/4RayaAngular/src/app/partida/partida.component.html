@@ -13,7 +13,10 @@
             <button class="btn btn-rounded btn-primary" style="margin: 10px;" type ="button" (click)="cargarPartidas()" > Actualizar</button>
         </div>
         <h5 class="card-title">Listado de Partidas</h5>
-        <table class="table table-bordered">
+        <div class="alert alert-info" *ngIf="partidas.length==0">
+            Todavía no se han creado partidas, ¡empieza tu una!
+        </div>
+        <table class="table table-bordered" *ngIf="partidas.length!=0">
             <thead>
 
                 <tr>
