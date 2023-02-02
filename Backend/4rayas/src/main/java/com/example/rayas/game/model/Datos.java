@@ -11,5 +11,7 @@ public class Datos {
 
     int colum;
 
+    int turn;
+
 
 }

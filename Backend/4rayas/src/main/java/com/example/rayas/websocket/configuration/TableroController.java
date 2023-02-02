@@ -26,12 +26,23 @@ public class TableroController {
     @MessageMapping("/movimiento")
     @SendTo("/tablero/movimiento")
     public Game movimiento(Datos datos){
+//        Game game=gameService.getGameById(datos.getIdGame()).block();
+//        System.out.println(datos.getIdPlayer()+" "+datos.getIdGame()+" "+datos.getColum());
+//        GameUtils.putToken(game,playerService.findByUserName(datos.getIdPlayer()).block(), datos.getColum());
+//        gameService.update(game);
+//
+//        return game;
         Game game=gameService.getGameById(datos.getIdGame()).block();
-        System.out.println(datos.getIdPlayer()+" "+datos.getIdGame()+" "+datos.getColum());
-        GameUtils.putToken(game,playerService.findByUserName(datos.getIdPlayer()).block(), datos.getColum());
-        gameService.update(game);
-
-        return game;
+        if(datos.getIdPlayer().equals(game.getPlayerOne()) && datos.getTurn() % 2 != 0
+                || datos.getIdPlayer().equals(game.getPlayerTwo()) && datos.getTurn() % 2 == 0){
+            System.out.println(datos.getIdPlayer()+" "+datos.getIdGame()+" "+datos.getColum());
+            GameUtils.putToken(game,playerService.findByUserName(datos.getIdPlayer()).block(), datos.getColum());
+            gameService.update(game);
+            return game;
+        }
+        else{
+            return new Game();
+        }
 
     }
 }

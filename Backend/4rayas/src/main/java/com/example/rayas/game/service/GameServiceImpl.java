@@ -1,6 +1,7 @@
 package com.example.rayas.game.service;
 
 import com.example.rayas.game.infraestructure.repository.GameRepository;
+import com.example.rayas.game.model.Estados;
 import com.example.rayas.game.model.Game;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,7 +23,7 @@ public class GameServiceImpl implements GameService{
         LocalDateTime ldt = LocalDateTime.now();
         game.setCreateAt(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm", Locale.ITALY).format(ldt));
         game.setId(String.valueOf(new Random().nextInt(1,1000000)));
-
+        game.setStatus(Estados.Abierto);
         return gameRepository.save(game).block();
     }
     @Override
@@ -46,8 +47,11 @@ public class GameServiceImpl implements GameService{
     @Override
     public Mono<Game> addPlayerTwo(String idGame, String playerTwo) {
         Game game = gameRepository.findById(idGame).block();
+        if( game.getPlayerTwo()==null || game.getPlayerTwo().equals("") ){
+            game.setPlayerTwo(playerTwo);
+        }
 
-        game.setPlayerTwo(playerTwo);
+        game.setStatus(Estados.Cerrado);
 
 
         return gameRepository.save(game);

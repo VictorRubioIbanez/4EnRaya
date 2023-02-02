@@ -6,8 +6,10 @@ export class FichaService {
 
   private idT = new BehaviorSubject(0);
   private user = new BehaviorSubject("default")
+  
   currentId=this.idT.asObservable();
   currentUser=this.user.asObservable();
+  
 
   constructor() { }
 
@@ -17,4 +19,5 @@ export class FichaService {
   changeUser(USER:string){
     this.user.next(USER)
   }
+  
 }

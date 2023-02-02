@@ -19,7 +19,6 @@ public class Game {
     private String createAt;
     private String playerOne;
     private String playerTwo;
-    private boolean status;
     private String[][] board = new String[][]{
             {"0","0","0","0","0","0","0"},
             {"0","0","0","0","0","0","0"},
@@ -28,5 +27,6 @@ public class Game {
             {"0","0","0","0","0","0","0"},
             {"0","0","0","0","0","0","0"}
     };
+    private Estados status;
 
 }

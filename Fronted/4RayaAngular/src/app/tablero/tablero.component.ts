@@ -16,7 +16,9 @@ export class TableroComponent {
     
     columnas= [0,1,2,3,4,5,6]
 
+    one:string;
 
+    two:string;
 
     idT:number;
 
@@ -31,7 +33,7 @@ export class TableroComponent {
 
     ngOnInit(): void {
       this.suscription=this.data.currentId.subscribe(idT => this.idT=idT)
-     
+      
         
         
     }

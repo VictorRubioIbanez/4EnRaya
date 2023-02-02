@@ -1,5 +1,6 @@
 package com.example.rayas.game;
 
+import com.example.rayas.game.model.Estados;
 import com.example.rayas.game.model.Game;
 import com.example.rayas.player.model.Player;
 import lombok.Data;
@@ -19,14 +20,13 @@ public class GameUtils {
            checkColumnSpace(game,column);
 
 
+
         if (coordinates[0] == 9 && coordinates[1] == 9) {
             System.out.println("There is no space in this column");
         } else {
-
             game.getBoard()[coordinates[0]][coordinates[1]] = player.getUserName();
-
-
         }
+        checkTables(game);
         return checkBoard(game,player.getUserName());
     }
 
@@ -46,6 +46,18 @@ public class GameUtils {
 
             System.out.print("\n");
         }
+    }
+
+    private static void checkTables(Game game){
+        boolean espacio=false;
+        for(int i=0;i<7;i++){
+            checkColumnSpace(game,i);
+            if (coordinates[0] != 9 && coordinates[1] != 9) {
+                espacio=true;
+                break;
+            }
+        }
+        if (!espacio) game.setStatus(Estados.Empate);
     }
 
     //Checks whether you have an available space or not inside the chosen
@@ -95,9 +107,9 @@ public class GameUtils {
                 if (game.getBoard()[i][j].equals(playerName)) {
                     horizontalCounter++;
                     if (horizontalCounter >= 4 ) {
-                        game.setStatus(true);
                         System.out.println("WINNER in line: " + (i+1) + " || Player: " + playerName);
-                        game.setStatus(true);
+                        if (game.getPlayerOne().equals(playerName)) game.setStatus(Estados.Ganador1);
+                        if (game.getPlayerTwo().equals(playerName)) game.setStatus(Estados.Ganador2);
 
                         return false;
                     }
@@ -124,9 +136,10 @@ public class GameUtils {
                 if (game.getBoard()[j][i].equals(playerName)) {
                     verticalCounter++;
                     if (verticalCounter >= 4) {
-                        game.setStatus(true);
                         System.out.println("WINNER in column: " + (i+1) + " || Player: " + playerName);
-                        game.setStatus(true);
+                        if (game.getPlayerOne().equals(playerName)) game.setStatus(Estados.Ganador1);
+                        if (game.getPlayerTwo().equals(playerName)) game.setStatus(Estados.Ganador2);
+
 
                         return false;
                     }
@@ -152,7 +165,9 @@ public class GameUtils {
                         game.getBoard()[i + 1][j + 1].contains(playerName) &&
                         game.getBoard()[i + 2][j + 2].contains(playerName) &&
                         game.getBoard()[i + 3][j + 3].contains(playerName)) {
-                    game.setStatus(true);
+                    if (game.getPlayerOne().equals(playerName)) game.setStatus(Estados.Ganador1);
+                    if (game.getPlayerTwo().equals(playerName)) game.setStatus(Estados.Ganador2);
+
                     System.out.println( "WINNER || Player: " + playerName);
 
                     return false;
@@ -167,7 +182,9 @@ public class GameUtils {
                         game.getBoard()[i + 1][j - 1].contains(playerName) &&
                         game.getBoard()[i + 2][j - 2].contains(playerName) &&
                         game.getBoard()[i + 3][j - 3].contains(playerName)) {
-                    game.setStatus(true);
+                    if (game.getPlayerOne().equals(playerName)) game.setStatus(Estados.Ganador1);
+                    if (game.getPlayerTwo().equals(playerName)) game.setStatus(Estados.Ganador2);
+
                     System.out.println( "WINNER || Player: " + playerName);
 
                     return false;
@@ -182,7 +199,9 @@ public class GameUtils {
                         game.getBoard()[i - 1][j + 1].contains(playerName) &&
                         game.getBoard()[i - 2][j + 2].contains(playerName) &&
                         game.getBoard()[i - 3][j + 3].contains(playerName)) {
-                    game.setStatus(true);
+                    if (game.getPlayerOne().equals(playerName)) game.setStatus(Estados.Ganador1);
+                    if (game.getPlayerTwo().equals(playerName)) game.setStatus(Estados.Ganador2);
+
                     System.out.println( "WINNER || Player: " + playerName);
 
                     return false;
@@ -197,7 +216,9 @@ public class GameUtils {
                         game.getBoard()[i - 1][j - 1].contains(playerName) &&
                         game.getBoard()[i - 2][j - 2].contains(playerName) &&
                         game.getBoard()[i - 3][j - 3].contains(playerName)) {
-                    game.setStatus(true);
+                    if (game.getPlayerOne().equals(playerName)) game.setStatus(Estados.Ganador1);
+                    if (game.getPlayerTwo().equals(playerName)) game.setStatus(Estados.Ganador2);
+
                     System.out.println( "WINNER || Player: " + playerName);
 
                     return false;

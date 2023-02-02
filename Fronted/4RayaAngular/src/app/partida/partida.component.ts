@@ -29,7 +29,11 @@ export class PartidaComponent implements OnInit{
 
   public partidas:Game[] | undefined;
 
-  constructor(private PartidaService:PartidaService, private router:Router,private activatedRoute:ActivatedRoute,private data:FichaService,private http:HttpClient) {}
+  constructor(private PartidaService:PartidaService, 
+    private router:Router,
+    private activatedRoute:ActivatedRoute,
+    private data:FichaService,
+    private http:HttpClient) {}
 
   ngOnInit(): void {
 
@@ -49,9 +53,13 @@ export class PartidaComponent implements OnInit{
   abrirPartida(idT:number){
     this.data.changeId(idT)
     if(this.game.playerOne!=this.userName){
+     if(this.game.playerTwo=="" || this.game.playerTwo==null) {
       this.game.playerTwo=this.userName;
+     }
+      
       this.http.post("http://localhost:8080/game/playerTwo/"+idT+"/"+this.userName,"").subscribe();
     }
+   
     this.router.navigate(["/tablero"])
     
 

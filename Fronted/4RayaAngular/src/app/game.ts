@@ -4,7 +4,7 @@ export class Game {
     playerOne!: string;
     playerTwo!: string;
     createAt!: string;
-    status:boolean;
+    status:string;
     board: string[6][7];
 
 }

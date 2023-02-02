@@ -33,7 +33,11 @@
                     <td class="text-uppercase">{{  Game.playerTwo }}</td>
                     <td class="date-format dd-mm-yyyy ">{{  Game.createAt }}</td>
                     <td>
-                        <button type="button" *ngIf="Game.status==false" (click)="abrirPartida(Game.id)" class="btn btn-primary btn-sm">Jugar</button>
+                        <button type="button" *ngIf="Game.status=='Abierto'" (click)="abrirPartida(Game.id)" class="btn btn-primary btn-sm">Jugar</button>
+                        <button type="button" *ngIf="Game.status=='Ganador1'"  class="btn btn-primary btn-sm">Gano {{Game.playerOne}}</button>
+                        <button type="button" *ngIf="Game.status=='Ganador2'"  class="btn btn-primary btn-sm">Gano {{Game.playerTwo}}</button>
+                        <button type="button" *ngIf="Game.status=='Empate'"  class="btn btn-primary btn-sm">Empate</button>
+                        <button type="button" *ngIf="Game.status=='Cerrado'" (click)="abrirPartida(Game.id)" class="btn btn-primary btn-sm">Espectar</button>
                     </td>
                     <td>
                         <button type="button" name="eliminar"  (click)="delete(Game)"class="btn btn-danger btn-sm">Eliminar</button>
