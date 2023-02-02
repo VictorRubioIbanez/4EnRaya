@@ -3,7 +3,7 @@ import { FichaService } from './../ficha.service';
 import swal from "sweetalert2";
 
 import { Component ,Input} from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Game } from '../game';
@@ -31,7 +31,7 @@ export class ColumnaComponent {
 
   suscription:Subscription;
 
-  constructor(private http: HttpClient,
+  constructor(
    private _router:Router,
    private data:FichaService){
 
@@ -48,20 +48,23 @@ export class ColumnaComponent {
 
         ColumnaComponent.client.activate();
 
-        ColumnaComponent.client.subscribe('/tablero/movimiento', e =>{
+        ColumnaComponent.client.onConnect=(frame)=>{
+          ColumnaComponent.client.subscribe('/tablero/movimiento', e =>{
             let g:Game = JSON.parse(e.body) as Game;
             console.log(g.id)
             console.log(g.playerOne)
             console.log(g.board[0][0])
             if(g.id==this.idPartida){
-                if(g.board[5][this.mov]!="0"){
+                if(g.board[0][this.mov]!="0"){
                   this.numeroFichas=6
                 }
             for(let i=0; i<6;i++){
                 if(g.board[i][this.mov]=="0"){
+                  console.log("Por aqui he pasado")
                   this.celdas[i].bg='white'
                 }
                 if(g.board[i][this.mov]==g.playerOne){
+                  console.log("Por aqui tambien")
                   this.celdas[i].bg='red'
                 }
                 if(g.board[i][this.mov]==g.playerTwo){
@@ -70,6 +73,7 @@ export class ColumnaComponent {
             }
           }
         });
+        }
        
 
       }
