@@ -3,13 +3,11 @@
     <form  class="custom-form" #usuarioForm="ngForm" (ngSubmit)="onSubmit(usuarioForm.value)">
         <div>
             <div id="userOne" class="row">
-                <div>
-                    <label>Usuario </label>
-                    <input type="text" name="userName" placeholder="usuario"  ngModel>
+                <div></div>
+                    <input type="text" name="userName" placeholder="Usuario"  ngModel>
                 </div>
                 <div>
-                    <label>Contraseña:</label>
-                    <input type="password" name="password"  placeholder="password" ngModel>
+                    <input type="password" name="password"  placeholder="Password" ngModel>
                 </div>
                 <div *ngIf="show" class="col-12">
                     <a class="alerta">Contraseña incorrecta</a>

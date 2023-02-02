@@ -95,5 +95,6 @@ export class ColumnaComponent {
        var datos: Datos= new Datos(this.idPartida.toString(), this.userName,this.mov,this.turn);
        this.client.publish({destination:"/app/movimiento",body: JSON.stringify(datos)});
       
-    }}
+    }
+  }
 

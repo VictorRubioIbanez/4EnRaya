@@ -40,7 +40,7 @@ export class PartidaComponent implements OnInit{
     this.suscription=this.data.currentUser.subscribe(user=>this.userName=user)
     this.cargarPartidas();
     if(this.userName=="default"){
-      swal.fire('Sesión caducada', `Volver a la pantalla de inicio`, 'success', ).then((result) =>
+      swal.fire('<strong>Sesión caducada</strong>', `Te devolvemos a la pantalla de login`, 'success', ).then((result) =>
       
       this.router.navigate(["/usuario"])
         
@@ -84,7 +84,7 @@ export class PartidaComponent implements OnInit{
       {
         
        // window.location.reload();
-       swal.fire('Nuevo Partida', `Juego ${this.game.playerOne}  creado con exito`, 'success', ).then((result) =>
+       swal.fire('<strong>Nueva Partida</strong>', `Juego ${this.game.playerOne}  creado con exito`, 'success', ).then((result) =>
       
       this.cargarPartidas()
         
@@ -99,13 +99,15 @@ export class PartidaComponent implements OnInit{
 
   delete(game:Game):void{
     swal.fire({
-      title: 'Estas seguro de borrar la partida',
-      text: `Seguro que desea eliminar la partida con la id:${game.id} y el nombre de usuario:${game.playerOne}`,
+      title: '<strong>¿Estás seguro de borrar la partida?</strong>',
+      text: `Seguro que desea eliminar la partida con la ID: ${game.id} y el nombre de usuario: ${game.playerOne}`,
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Si, Eliminalo!'
+
+      confirmButtonText: '¡Sí, elimínalo!',
+      cancelButtonText: 'Cancélalo, por favor'
     }).then((result) => {
       if (result.value) {
         
@@ -115,7 +117,7 @@ export class PartidaComponent implements OnInit{
             this.cargarPartidas();
 
         swal.fire(
-          'Partida Eliminada!',
+          '<strong>¡Partida eliminada!</strong>',
           'La partida ha sido eliminado',
           'success'
         )
