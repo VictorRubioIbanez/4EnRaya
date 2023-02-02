@@ -21,14 +21,7 @@ private httpHeaders = new HttpHeaders({'Content-Type':'application/json'})
   constructor(private http: HttpClient) { }
 
   getPartidas(): Observable<Game[]>{
-    Swal.fire({
-      title: '<strong>Lista de partidas actualizadas</strong>',
-      icon: 'info',
-      text: 'La lista ha sido actualizada, ¡busca un oponente!',
-      position: 'center',
-      showConfirmButton: false,
-      timer: 1500
-    })
+    
     return this.http.get<Game[]>('http://localhost:8080/game/all');
   }
 

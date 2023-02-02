@@ -52,6 +52,7 @@ export class PartidaComponent implements OnInit{
 
   abrirPartida(idT:number){
     this.data.changeId(idT)
+    this.data.changeUser(this.userName)
     if(this.game.playerOne!=this.userName){
      if(this.game.playerTwo=="" || this.game.playerTwo==null) {
       this.game.playerTwo=this.userName;

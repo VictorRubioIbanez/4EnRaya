@@ -1,3 +1,4 @@
+import { ChatComponent } from './tablero/chat.component';
 import { PresentacionComponent } from './presentacion/presentacion.component';
 
 import { FooterComponent } from './footer/footer.component';
@@ -35,7 +36,8 @@ const routes: Routes = [
     FooterComponent,
     PresentacionComponent,
     UsuarioComponent,
-    PartidaComponent
+    PartidaComponent,
+    ChatComponent
   ],
   imports: [
     BrowserModule,

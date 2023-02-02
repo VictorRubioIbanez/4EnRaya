@@ -14,6 +14,15 @@ app-columna {
     margin-top: 30px;
     float: left;
 }
+.col1 {
+
+  width: 65%;
+}
+.col2 {
+  border: white;
+  width: 35%;
+  margin-top: 50px;
+}
 
 body {
     margin: 0;

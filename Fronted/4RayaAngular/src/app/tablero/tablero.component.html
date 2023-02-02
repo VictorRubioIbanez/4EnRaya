@@ -9,9 +9,15 @@
     <div class="before"></div>
     <div class="after"></div>
 </div>
-<div>
-    <h1>Id de partida {{idT}}</h1>
-    <app-columna *ngFor="let columna of columnas" id="{{columna}}" [mov]="columna" [idPartida]="idT"></app-columna>
-   
-
+<div class="container-fluid" id="main-content">
+    <div class="container">
+        <div class="row">
+            <div class="col1">
+                <h1>Id de partida {{idT}}</h1>
+                <app-columna *ngFor="let columna of columnas" id="{{columna}}" [mov]="columna" [idPartida]="idT"></app-columna>
+            </div>
+            <div class="col2"> <app-chat [userName]="userName"></app-chat></div>
+        </div>
+    </div>
 </div>
+
