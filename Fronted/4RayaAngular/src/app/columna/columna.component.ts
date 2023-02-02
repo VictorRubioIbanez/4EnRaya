@@ -20,7 +20,7 @@ import * as SockJS from 'sockjs-client';
 
 export class ColumnaComponent {
 
-  private static client: Client;
+  private  client: Client;
 
   @Input() idPartida:number;
   @Input() mov:number;
@@ -38,22 +38,20 @@ export class ColumnaComponent {
 }
   
  
-  ngOnInit(): void {
+   ngOnInit(): void {
     this.suscription=this.data.currentUser.subscribe(user=>this.userName=user)
 
-    ColumnaComponent.client=new Client();
-        ColumnaComponent.client.webSocketFactory= ()=>{
+    this.client=new Client();
+        this.client.webSocketFactory= ()=>{
           return new SockJS("http://localhost:8080/game-websockect");
        }
 
-        ColumnaComponent.client.activate();
+        this.client.activate();
 
-        ColumnaComponent.client.onConnect=(frame)=>{
-          ColumnaComponent.client.subscribe('/tablero/movimiento', e =>{
+        this.client.onConnect=(frame)=>{
+          this.client.subscribe('/tablero/movimiento', e =>{
             let g:Game = JSON.parse(e.body) as Game;
-            console.log(g.id)
-            console.log(g.playerOne)
-            console.log(g.board[0][0])
+            
             if(g.id==this.idPartida){
                 if(g.board[0][this.mov]!="0"){
                   this.numeroFichas=6
@@ -102,7 +100,7 @@ export class ColumnaComponent {
       ColumnaComponent.turno=ColumnaComponent.turno+1
        */
        var datos: Datos= new Datos(this.idPartida.toString(), this.userName,this.mov);
-       ColumnaComponent.client.publish({destination:"/app/movimiento",body: JSON.stringify(datos)});
+       this.client.publish({destination:"/app/movimiento",body: JSON.stringify(datos)});
 
 
 
