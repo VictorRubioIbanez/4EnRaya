@@ -83,7 +83,9 @@ export class ColumnaComponent {
       var jugador:number=1;
       var res = ColumnaComponent.turno%2
       this.numeroFichas++;
+
       if(this.contador>=0){
+
        if(res==0){
          jugador=1;
         this.celdas[this.contador].bg='red'
