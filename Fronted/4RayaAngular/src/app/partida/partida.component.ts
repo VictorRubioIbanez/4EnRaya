@@ -3,9 +3,10 @@ import { Component, OnInit } from '@angular/core';
 import { PartidaService } from './partida.service';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Game } from './Game';
+import { Game } from '../game';
 import swal from "sweetalert2";
 import { Subscription } from 'rxjs';
+
 
 
 
@@ -40,15 +41,18 @@ export class PartidaComponent implements OnInit{
       this.router.navigate(["/usuario"])
         
         );
-    }
+   }
    
   }
 
 
   abrirPartida(idT:number){
     this.data.changeId(idT)
+    if(this.game.playerOne!=this.userName){
+      this.game.playerTwo=this.userName;
+    }
     this.router.navigate(["/tablero"])
-
+    
 
   }
 
@@ -65,12 +69,7 @@ export class PartidaComponent implements OnInit{
   
 
   public create():void{
-
-    
-    
-
     this.game.playerOne=this.userName;
-    
     this.PartidaService.create(this.game).subscribe(
       game => 
       {

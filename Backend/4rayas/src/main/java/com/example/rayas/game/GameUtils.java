@@ -9,45 +9,33 @@ import lombok.Data;
 @Data
 public class GameUtils {
 
-    static final String WINNERPHRASE = "WINNER || Player: ";
 
-    private static GameUtils single_instance = null;
-    private static Game game;
-    private static String[][] board;
-    private GameUtils(Game game) {
-        this.game = game;
-        this.board = game.getBoard();
-    }
-    public static GameUtils getInstance(Game game) {
-        if (single_instance == null)
-            single_instance = new GameUtils(game);
-        return single_instance;
-    }
+    static int[] coordinates=new int[2];
+
     //The player (or just its name) gets passed as a parameter to the
     //function, where the name is used in the array instead of a number
-    public static void putToken(Player player, int column) {
-        int[] coordinates = new int[2];
-
-        checkColumnSpace(column);
+    public static boolean putToken(Game game,Player player, int column) {
+           checkColumnSpace(game,column);
 
         if (coordinates[0] == 9 && coordinates[1] == 9) {
             System.out.println("There is no space in this column");
         } else {
-            board[coordinates[0]][coordinates[1]] = player.getUserName();
-            checkBoard(player.getUserName());
+            game.getBoard()[coordinates[0]][coordinates[1]] = player.getUserName();
+
         }
+        return checkBoard(game,player.getUserName());
     }
 
     //Shows how the array is displayed in a visual manner
-    public static void showActualBoard() {
+    public static void showActualBoard(Game game) {
 
-        for (int i = 0; i < board.length; i++) {
+        for (int i = 0; i < game.getBoard().length; i++) {
 
             System.out.print("Row " + (i+1) + " || ");
 
-            for (int j = 0; j < board[i].length; j++){
+            for (int j = 0; j < game.getBoard()[i].length; j++){
 
-                System.out.print(board[i][j] + " | ");
+                System.out.print(game.getBoard()[i][j] + " | ");
             }
 
             System.out.print("\n");
@@ -56,14 +44,14 @@ public class GameUtils {
 
     //Checks whether you have an available space or not inside the chosen
     //column
-    public static int[] checkColumnSpace(int column) {
-        int[] coordinates = new int[2];
+    public static void checkColumnSpace(Game game,int column) {
+
 
         coordinates[0]=9;
         coordinates[1]=9;
 
-        for (int i = 0; i < board.length; i++){
-            if ( board[i][column] == null ){
+        for (int i = 0; i < game.getBoard().length; i++){
+            if ( game.getBoard()[i][column].equals("0")  ){
                 coordinates[0]=i;
                 coordinates[1]=column;
                 break;
@@ -71,13 +59,13 @@ public class GameUtils {
         }
 
         System.out.println(coordinates[0] + " " + coordinates[1]);
-        return coordinates;
+
     }
 
-    public static boolean checkBoard(String playerName) {
+    public static boolean checkBoard(Game game,String playerName) {
         boolean checkBoolean = true;
 
-        if (!checkHorizontal(playerName) || !checkVertical(playerName) || !checkDiagonal(playerName)) {
+        if (!checkHorizontal(game,playerName) || !checkVertical(game,playerName) || !checkDiagonal(game,playerName)) {
             checkBoolean = false;
         }
 
@@ -85,20 +73,21 @@ public class GameUtils {
     }
 
     //Checking vertical tokens
-    private static boolean checkHorizontal(String playerName) {
+    private static boolean checkHorizontal(Game game,String playerName) {
         int horizontalCounter = 0;
 
-        for (int i = 0; i < board.length; i++) {
+        for (int i = 0; i < game.getBoard().length; i++) {
 
-            for (int j = 0; j < board[0].length; j++) {
-                if (board[i][j] == playerName) {
+            for (int j = 0; j < game.getBoard()[0].length; j++) {
+                if (game.getBoard()[i][j].equals(playerName)) {
                     horizontalCounter++;
                     if (horizontalCounter >= 4 ) {
+                        game.setStatus(true);
                         System.out.println("WINNER in line: " + (i+1) + " || Player: " + playerName);
                         game.setStatus(true);
                         return false;
                     }
-                } else if (board[i][j] != null) {
+                } else if (!game.getBoard()[i][j].equals("0")) {
                     horizontalCounter = 0;
                 }
             }
@@ -109,20 +98,21 @@ public class GameUtils {
     }
 
     //Checking vertical tokens
-    private static boolean checkVertical(String playerName) {
+    private static boolean checkVertical(Game game,String playerName) {
         int verticalCounter = 0;
 
-        for (int i = 0; i < board[0].length; i++) {
+        for (int i = 0; i < game.getBoard()[0].length; i++) {
 
-            for (int j = 0; j < board.length; j++) {
-                if (board[j][i] == playerName) {
+            for (int j = 0; j < game.getBoard().length; j++) {
+                if (game.getBoard()[j][i].equals(playerName)) {
                     verticalCounter++;
                     if (verticalCounter >= 4) {
+                        game.setStatus(true);
                         System.out.println("WINNER in column: " + (i+1) + " || Player: " + playerName);
                         game.setStatus(true);
                         return false;
                     }
-                } else if (board[j][i] != null ) {
+                } else if (!game.getBoard()[j][i].equals("0") ) {
 
                     verticalCounter = 0;
 
@@ -135,15 +125,16 @@ public class GameUtils {
     }
 
     //Fixed by Jose Del Rio
-    private static boolean checkDiagonal(String playerName) {
+    private static boolean checkDiagonal(Game game,String playerName) {
 
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 4; j++) {
-                if (board[i][j].contains(playerName) &&
-                        board[i + 1][j + 1].contains(playerName) &&
-                        board[i + 2][j + 2].contains(playerName) &&
-                        board[i + 3][j + 3].contains(playerName)) {
-                    System.out.println(WINNERPHRASE + playerName);
+                if (game.getBoard()[i][j].contains(playerName) &&
+                        game.getBoard()[i + 1][j + 1].contains(playerName) &&
+                        game.getBoard()[i + 2][j + 2].contains(playerName) &&
+                        game.getBoard()[i + 3][j + 3].contains(playerName)) {
+                    game.setStatus(true);
+                    System.out.println( "WINNER || Player: " + playerName);
                     return false;
                 }
             }
@@ -151,11 +142,12 @@ public class GameUtils {
 
         for (int i = 0; i < 3; i++) {
             for (int j = 6; j > 4; j--) {
-                if (board[i][j].contains(playerName) &&
-                        board[i + 1][j - 1].contains(playerName) &&
-                        board[i + 2][j - 2].contains(playerName) &&
-                        board[i + 3][j - 3].contains(playerName)) {
-                    System.out.println(WINNERPHRASE + playerName);
+                if (game.getBoard()[i][j].contains(playerName) &&
+                        game.getBoard()[i + 1][j - 1].contains(playerName) &&
+                        game.getBoard()[i + 2][j - 2].contains(playerName) &&
+                        game.getBoard()[i + 3][j - 3].contains(playerName)) {
+                    game.setStatus(true);
+                    System.out.println( "WINNER || Player: " + playerName);
                     return false;
                 }
             }
@@ -163,11 +155,12 @@ public class GameUtils {
 
         for (int i = 5; i > 3; i--) {
             for (int j = 0; j < 4; j++) {
-                if (board[i][j].contains(playerName) &&
-                        board[i - 1][j + 1].contains(playerName) &&
-                        board[i - 2][j + 2].contains(playerName) &&
-                        board[i - 3][j + 3].contains(playerName)) {
-                    System.out.println(WINNERPHRASE + playerName);
+                if (game.getBoard()[i][j].contains(playerName) &&
+                        game.getBoard()[i - 1][j + 1].contains(playerName) &&
+                        game.getBoard()[i - 2][j + 2].contains(playerName) &&
+                        game.getBoard()[i - 3][j + 3].contains(playerName)) {
+                    game.setStatus(true);
+                    System.out.println( "WINNER || Player: " + playerName);
                     return false;
                 }
             }
@@ -175,11 +168,12 @@ public class GameUtils {
 
         for (int i = 5; i > 3; i--) {
             for (int j = 6; j > 4; j--) {
-                if (board[i][j].contains(playerName) &&
-                        board[i - 1][j - 1].contains(playerName) &&
-                        board[i - 2][j - 2].contains(playerName) &&
-                        board[i - 3][j - 3].contains(playerName)) {
-                    System.out.println(WINNERPHRASE + playerName);
+                if (game.getBoard()[i][j].contains(playerName) &&
+                        game.getBoard()[i - 1][j - 1].contains(playerName) &&
+                        game.getBoard()[i - 2][j - 2].contains(playerName) &&
+                        game.getBoard()[i - 3][j - 3].contains(playerName)) {
+                    game.setStatus(true);
+                    System.out.println( "WINNER || Player: " + playerName);
                     return false;
                 }
             }

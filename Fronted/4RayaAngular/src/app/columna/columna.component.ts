@@ -1,9 +1,14 @@
-
+import { Datos } from './../Datos';
+import { FichaService } from './../ficha.service';
+import swal from "sweetalert2";
 
 import { Component ,Input} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-
+import { Subscription } from 'rxjs';
+import { Game } from '../game';
+import { Client } from '@stomp/stompjs';
+import * as SockJS from 'sockjs-client';
 
 
 @Component({
@@ -15,30 +20,70 @@ import { Router } from '@angular/router';
 
 export class ColumnaComponent {
 
+  private static client: Client;
 
+  @Input() idPartida:number;
+  @Input() mov:number;
   static turno=0;
   public numeroFichas :number =0;
 
-  constructor(private http: HttpClient,
-   private _router:Router){
+  userName: string ;
 
+  suscription:Subscription;
+
+  constructor(private http: HttpClient,
+   private _router:Router,
+   private data:FichaService){
 
 }
-  @Input() mov:number;
+  
+ 
   ngOnInit(): void {
-     
-  }
+    this.suscription=this.data.currentUser.subscribe(user=>this.userName=user)
+
+    ColumnaComponent.client=new Client();
+        ColumnaComponent.client.webSocketFactory= ()=>{
+          return new SockJS("http://localhost:8080/game-websockect");
+       }
+
+        ColumnaComponent.client.activate();
+
+        ColumnaComponent.client.subscribe('/tablero/movimiento', e =>{
+            let g:Game = JSON.parse(e.body) as Game;
+            console.log(g.id)
+            console.log(g.playerOne)
+            console.log(g.board[0][0])
+            if(g.id==this.idPartida){
+                if(g.board[5][this.mov]!="0"){
+                  this.numeroFichas=6
+                }
+            for(let i=0; i<6;i++){
+                if(g.board[i][this.mov]=="0"){
+                  this.celdas[i].bg='white'
+                }
+                if(g.board[i][this.mov]==g.playerOne){
+                  this.celdas[i].bg='red'
+                }
+                if(g.board[i][this.mov]==g.playerTwo){
+                  this.celdas[i].bg='black'
+                }
+            }
+          }
+        });
+       
+
+      }
 
   celdas=  [{id:0,bg: 'white' }, { id:1, bg: 'white' }, { id:2,  bg: 'white'  } ,  {  id:3, bg: 'white' },  {  id:4, bg: 'white' },  { id:5, bg: 'white' },
 ]
    contador=5;
 
    addToken(num:number){
-     
+     /*
       var jugador:number=1;
       var res = ColumnaComponent.turno%2
-
-    if(this.contador>=0){
+      this.numeroFichas++;
+      if(this.contador>=0){
        if(res==0){
          jugador=1;
         this.celdas[this.contador].bg='red'
@@ -47,23 +92,24 @@ export class ColumnaComponent {
          jugador=2;
         this.celdas[this.contador].bg='black'
        }
-        
-        this.contador=this.contador-1;
-       ColumnaComponent.turno=ColumnaComponent.turno+1
-      localStorage.clear(); 
-      localStorage.setItem('Ganador',jugador.toString());
-       this.http.post<boolean>("http://localhost:8080/game/"+num+"/"+jugador,"").subscribe(response  => { 
-       if(response==false){
-       this._router.navigate(['/final']);
-     
-      }
-        
-      });
+      this.contador=this.contador-1;
+      ColumnaComponent.turno=ColumnaComponent.turno+1
+       */
+       var datos: Datos= new Datos(this.idPartida.toString(), this.userName,this.mov);
+       ColumnaComponent.client.publish({destination:"/app/movimiento",body: JSON.stringify(datos)});
+
+
+
+     //  this.http.post<boolean>("http://localhost:8080/game/"+num+"/"+this.userName+"/"+this.idPartida,"").subscribe(response  => { 
+     //  if(response==false){
+     //   swal.fire('LA PARTIDA SE ACABO', `El ganador es `+jugador.toString(), 'success', ).then((result) =>
+      //  this._router.navigate(["/partida"])
+      //    );
+     // }
+    //  });
        
         
-       
-       console.log( this.contador);
-    }
+
 
     }}
 

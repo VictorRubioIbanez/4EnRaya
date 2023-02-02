@@ -14,6 +14,9 @@ public class PlayerServiceImpl implements PlayerService{
     @Autowired
     PlayerRepository playerRepository;
 
+
+
+
     @Override
     public boolean checkPlayer(Player player) {
         Mono<Player> checkPlayerMono = playerRepository.findByUserName(player.getUserName());
@@ -33,5 +36,10 @@ public class PlayerServiceImpl implements PlayerService{
         else{
             return false;
         }
+    }
+
+    @Override
+    public Mono<Player> findByUserName(String userName) {
+        return playerRepository.findByUserName(userName);
     }
 }

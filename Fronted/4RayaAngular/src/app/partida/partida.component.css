@@ -4,3 +4,9 @@ th{
 td{
     text-align: center;
 }
+#raiz{
+    overflow-x: hidden;
+     overflow-y:scroll;
+      position:relative;
+      height: 600px;
+}

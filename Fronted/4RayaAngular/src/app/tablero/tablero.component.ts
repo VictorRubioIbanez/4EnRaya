@@ -5,6 +5,7 @@ import {  getNgModuleById } from '@angular/core';
 import { FichaService } from './../ficha.service';
 
 
+
 @Component({
   selector: 'app-tablero',
   templateUrl: './tablero.component.html',
@@ -12,6 +13,7 @@ import { FichaService } from './../ficha.service';
 })
 export class TableroComponent {
   
+    
     columnas= [0,1,2,3,4,5,6]
 
 
@@ -30,9 +32,10 @@ export class TableroComponent {
     ngOnInit(): void {
       this.suscription=this.data.currentId.subscribe(idT => this.idT=idT)
      
-
+        
+        
     }
-  
+    
 
     goBackImage:string='/assets/imagenes/back.png'
     hideFire=true;

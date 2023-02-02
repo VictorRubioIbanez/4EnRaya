@@ -2,7 +2,6 @@ package com.example.rayas.game.service;
 
 import com.example.rayas.game.infraestructure.repository.GameRepository;
 import com.example.rayas.game.model.Game;
-import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
@@ -10,7 +9,6 @@ import reactor.core.publisher.Mono;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.Locale;
 import java.util.Random;
 
@@ -27,6 +25,9 @@ public class GameServiceImpl implements GameService{
 
         return gameRepository.save(game).block();
     }
+    @Override
+    public void update(Game game){gameRepository.save(game).subscribe();}
+
 
     @Override
     public Mono<Game> getGameById(String idGame) {

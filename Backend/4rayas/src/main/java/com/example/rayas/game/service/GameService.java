@@ -6,6 +6,9 @@ import reactor.core.publisher.Mono;
 
 public interface GameService {
     public Game createGame(Game game);
+
+    void update(Game game);
+
     public Mono<Game> getGameById(String idGame);
     public Flux<Game> getGames();
     public Mono<Void> deleteGame (String id);
