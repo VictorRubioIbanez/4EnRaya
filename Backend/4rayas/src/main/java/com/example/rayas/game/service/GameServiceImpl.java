@@ -46,7 +46,10 @@ public class GameServiceImpl implements GameService{
     @Override
     public Mono<Game> addPlayerTwo(String idGame, String playerTwo) {
         Game game = gameRepository.findById(idGame).block();
+
         game.setPlayerTwo(playerTwo);
+
+
         return gameRepository.save(game);
     }
 }
